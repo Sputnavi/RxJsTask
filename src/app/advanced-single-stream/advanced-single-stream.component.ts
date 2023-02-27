@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { interval, take, map, filter, of, delay, repeat, takeUntil, skipUntil, last } from 'rxjs';
+import { interval, take, of, delay, repeat, mergeMap, switchMap, exhaustMap, filter, concatMap } from 'rxjs';
 
 @Component({
   selector: 'app-advanced-single-stream',
@@ -9,37 +9,34 @@ import { interval, take, map, filter, of, delay, repeat, takeUntil, skipUntil, l
 export class AdvancedSingleStreamComponent {
   run1(): void {
     const numbers = interval(1000).pipe(take(20));
-    const subscribe = numbers.subscribe(x => 
-      of(x)
-        .pipe(delay(200), repeat(1000), takeUntil(numbers))
-      .subscribe(x => console.log(x)));
+    const repeatedNumbers = numbers.pipe(
+      switchMap(x => of(x).pipe(delay(200), repeat(1000)))
+    );
+    const subscribe = repeatedNumbers.subscribe(x => console.log(x));
   }
 
   run2(): void {
-    const numbers = interval(100).pipe(take(10));
-    const repeatedNumbers = numbers.pipe(repeat());
+    const numbers = interval(1000).pipe(take(20)); 
+    const repeatedNumbers = numbers.pipe(
+      concatMap(x => interval(100).pipe(take(10)))
+    );
     const subscribe = repeatedNumbers.subscribe(x => console.log(x));
   }
 
   run3(): void {
     const numbers = interval(1000).pipe(take(20));
-    const even = numbers.pipe(
-      filter(x => x % 2 == 0)
+    const repeatedNumbers = numbers.pipe(
+      filter(x => x % 2 == 0),
+      exhaustMap(x => of(x).pipe(delay(400), repeat(5)))
     );
-    const subscribe = even.subscribe(x => {
-      const repeated = of(x).pipe(delay(200), repeat(1000));
-
-      
-
-      repeated.subscribe(x => console.log(x))
-    });
+    const subscribe = repeatedNumbers.subscribe(x => console.log(x));
   }
 
   run4(): void {
     const numbers = interval(1000).pipe(take(20));
-    const subscribe = numbers.subscribe(x => 
-      of(x)
-        .pipe(delay(400), repeat(5))
-      .subscribe(x => console.log(x)));
+    const repeatedNumbers = numbers.pipe(
+      mergeMap(x => of(x).pipe(delay(300), repeat(5)))
+    );
+    const subscribe = repeatedNumbers.subscribe(x => console.log(x));
   }
 }
