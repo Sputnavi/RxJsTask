@@ -1,0 +1,18 @@
+.columns-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.column > * {
+    margin-bottom: 0.5rem;
+}
+
+button {
+    width: 100%;
+}
