@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { SimpleSingleStreamComponent } from './simple-single-stream/simple-single-stream.component';
 import { AdvancedSingleStreamComponent } from './advanced-single-stream/advanced-single-stream.component';
 import { MultipleStreamsComponent } from './multiple-streams/multiple-streams.component';
+import { SubjectsComponent } from './subjects/subjects.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     SimpleSingleStreamComponent,
     AdvancedSingleStreamComponent,
-    MultipleStreamsComponent
+    MultipleStreamsComponent,
+    SubjectsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

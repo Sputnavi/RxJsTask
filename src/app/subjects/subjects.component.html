@@ -1,0 +1,28 @@
+<div class="columns-container">
+    <div class="column">
+        <p><b>Subject</b></p>
+        <input type="text" [(ngModel)]="subjectValue">
+        <button (click)="addValue(1)">Add value</button>
+        <button (click)="complete(1)">Complete</button>
+    </div>
+    <div class="column">
+        <p><b>BehaviorSubject</b></p>
+        <input type="text" [(ngModel)]="behaviorSubjectValue">
+        <button (click)="addValue(2)">Add value</button>
+        <button (click)="getCurrentValue()">Get Current Value</button>
+        <button (click)="complete(2)">Complete</button>
+    </div>
+    <div class="column">
+        <p><b>ReplaySubject</b></p>
+        <input type="text" [(ngModel)]="replaySubjectValue">
+        <button (click)="addValue(3)">Add value</button>
+        <button (click)="addSubscriber()">Add subscriber</button>
+        <button (click)="complete(3)">Complete</button>
+    </div>
+    <div class="column">
+        <p><b>AsyncSubject</b></p>
+        <input type="text" [(ngModel)]="asyncSubjectValue">
+        <button (click)="addValue(4)">Add value</button>
+        <button (click)="complete(4)">Complete</button>
+    </div>
+</div>

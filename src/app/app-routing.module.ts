@@ -4,12 +4,14 @@ import { AdvancedSingleStreamComponent } from './advanced-single-stream/advanced
 import { AppComponent } from './app.component';
 import { MultipleStreamsComponent } from './multiple-streams/multiple-streams.component';
 import { SimpleSingleStreamComponent } from './simple-single-stream/simple-single-stream.component';
+import { SubjectsComponent } from './subjects/subjects.component';
 
 const routes: Routes = [
   { path: '', component: SimpleSingleStreamComponent},
   { path: 'simple-single-stream', component: SimpleSingleStreamComponent},
   { path: 'advanced-single-stream', component: AdvancedSingleStreamComponent},
   { path: 'multiple-streams', component: MultipleStreamsComponent},
+  { path: 'subjects', component: SubjectsComponent},
   { path: '**', redirectTo: '/'},
 ];
 
