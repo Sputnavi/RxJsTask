@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { interval, take, map, filter, combineAll, zip, combineLatest, last } from 'rxjs';
+import { interval, take, map, filter, combineAll, zip, combineLatest, last, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-multiple-streams',
@@ -22,13 +22,8 @@ export class MultipleStreamsComponent {
     const source2 = interval(300).pipe(take(10),map((val) => 'source2 val = ' + val));
     const source3 = interval(400).pipe(take(10),map((val) => 'source3 val = ' + val));
 
-    const last1 = source1.pipe(last());
-    const last2 = source2.pipe(last());
-    const last3 = source3.pipe(last());
-
-    const combined = zip([last1, last2, last3]);
-
-    const subscribe = combined.subscribe(([x1, x2, x3]) => console.log(x1, x2, x3));
+    const subscribe = forkJoin([source1, source2, source3])
+      .subscribe(([x1, x2, x3]) => console.log(x1, x2, x3));
   }
 
   run3(): void {
